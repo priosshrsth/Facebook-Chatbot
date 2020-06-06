@@ -12,6 +12,7 @@
   "include": [
     "index.ts",
     "lib/**/*.ts",
-    "spec/**/*.ts"
+    "spec/**/*.ts",
+    "providers"
   ]
 }
