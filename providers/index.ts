@@ -3,7 +3,7 @@ import { IocContract } from '@adonisjs/fold'
 import {FbHook, HookOptions} from '../index';
 
 
-export default class FbHookProvider {
+export default class Index {
   constructor (protected $container: IocContract) {
   }
   
