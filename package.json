@@ -1,0 +1,26 @@
+{
+  "name": "facebook-chatbot-hooks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Adonis js package for facebook chatbot",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pagevamp/chat-bot.git"
+  },
+  "keywords": [
+    "adonis",
+    "chatbot",
+    "facebook",
+    "messenger"
+  ],
+  "author": "Anit Shrestha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pagevamp/chat-bot/issues"
+  },
+  "homepage": "https://github.com/pagevamp/chat-bot#readme"
+}
