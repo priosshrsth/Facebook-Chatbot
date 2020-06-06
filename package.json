@@ -17,6 +17,11 @@
     "facebook",
     "messenger"
   ],
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "eventemitter3": "^4.0.4",
+    "node-fetch": "^2.6.0"
+  },
   "author": "Anit Shrestha",
   "license": "ISC",
   "bugs": {
