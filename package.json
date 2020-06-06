@@ -1,6 +1,6 @@
 {
   "name": "facebook-chatbot-hooks",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Adonis js package for facebook chatbot",
   "main": "index.ts",
