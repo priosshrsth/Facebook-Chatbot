@@ -17,7 +17,8 @@ export interface HookOptions {
   webhook?: string,
   broadcastEchoes?: boolean,
   allowTypingIndicator?: boolean,
-  persona?: PersonaOptions
+  persona?: PersonaOptions,
+  personaID?: string,
 }
 
 
@@ -28,7 +29,7 @@ export class FbHook extends EventEmitter {
   private readonly broadcastEchoes;
   private readonly webhook: string;
   private _hearMap;
-  private allowTypingIndicator: boolean = false;
+  private readonly allowTypingIndicator: boolean = false;
   private _conversations;
   private personaID: string;
 
@@ -36,6 +37,11 @@ export class FbHook extends EventEmitter {
     super();
     if (!options || (options && (!options.accessToken || !options.verifyToken || !options.appSecret))) {
       throw new Error('You need to specify an accessToken, verifyToken and appSecret');
+    }
+    if (options.personaID) {
+      this.personaID = options.personaID
+    } else if (options.persona) {
+      this.getPersona(options.persona).then()
     }
     this.accessToken = options.accessToken;
     this.verifyToken = options.verifyToken;
@@ -47,9 +53,6 @@ export class FbHook extends EventEmitter {
     this._hearMap = [];
     if ('allowTypingIndicator' in options) {
       this.allowTypingIndicator = Boolean(options.allowTypingIndicator);
-    }
-    if (options.persona) {
-      this.getPersona(options.persona)
     }
     this._conversations = [];
   }
@@ -72,8 +75,7 @@ export class FbHook extends EventEmitter {
       template_type: 'button',
       text
     };
-    const formattedButtons = this._formatButtons(buttons);
-    payload.buttons = formattedButtons;
+    payload.buttons = this._formatButtons(buttons);
     return this.sendTemplate(recipientId, payload, options);
   }
 
@@ -198,7 +200,7 @@ export class FbHook extends EventEmitter {
     const timeout = isNaN(milliseconds) ? 0 : milliseconds;
     if (milliseconds > 20000) {
       milliseconds = 20000;
-      console.error('sendTypingIndicator: max milliseconds value is 20000 (20 seconds)');
+      console.error(`sendTypingIndicator: max milliseconds value is ${milliseconds} (${milliseconds/1000} seconds)`);
     }
     return new Promise((resolve) => {
       return this.sendAction(recipientId, 'typing_on').then(() => {
@@ -214,8 +216,13 @@ export class FbHook extends EventEmitter {
       .catch(err => console.log(`Error getting user profile: ${err}`));
   }
   
-  getPersona(data: PersonaOptions): void {
-    fetch(`https://graph.facebook.com/me/personas?access_token=${this.accessToken}`, {
+  async getPersona(data: PersonaOptions) {
+    let self = this
+    let personaID = self.personaID
+    if (personaID) {
+      return personaID
+    }
+    await fetch(`https://graph.facebook.com/me/personas?access_token=${this.accessToken}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -224,9 +231,10 @@ export class FbHook extends EventEmitter {
     })
     .then(res => res.json())
     .then(data => {
-      this.personaID = data.id
+      personaID = self.personaID = data.id
     })
     .catch(err => console.log(`Error getting user profile: ${err}`));
+    return personaID
   }
 
   setGreetingText(text) {

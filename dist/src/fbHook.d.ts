@@ -12,6 +12,7 @@ export interface HookOptions {
     broadcastEchoes?: boolean;
     allowTypingIndicator?: boolean;
     persona?: PersonaOptions;
+    personaID?: string;
 }
 export declare class FbHook extends EventEmitter {
     private readonly accessToken;
@@ -20,7 +21,7 @@ export declare class FbHook extends EventEmitter {
     private readonly broadcastEchoes;
     private readonly webhook;
     private _hearMap;
-    private allowTypingIndicator;
+    private readonly allowTypingIndicator;
     private _conversations;
     private personaID;
     constructor(options: HookOptions);
@@ -38,7 +39,7 @@ export declare class FbHook extends EventEmitter {
     sendProfileRequest(body: any, method?: any): any;
     sendTypingIndicator(recipientId: any, milliseconds: any): Promise<unknown>;
     getUserProfile(userId: any): any;
-    getPersona(data: PersonaOptions): void;
+    getPersona(data: PersonaOptions): Promise<string>;
     setGreetingText(text: any): any;
     setGetStartedButton(action: any): any;
     deleteGetStartedButton(): any;
