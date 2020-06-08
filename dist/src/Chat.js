@@ -30,27 +30,35 @@ var Chat = /** @class */ (function (_super) {
         return this.bot.say(this.userId, message, options || {});
     };
     Chat.prototype.sendTextMessage = function (text, quickReplies, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendTextMessage(this.userId, text, quickReplies, options);
     };
     Chat.prototype.sendButtonTemplate = function (text, buttons, options) {
-        return this.bot.sendButtonTemplate(this.userId, text, buttons, options);
+        if (options === void 0) { options = {}; }
+        return this.bot.sendButtonTemplate(this.userId, text, buttons, options = {});
     };
     Chat.prototype.sendGenericTemplate = function (cards, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendGenericTemplate(this.userId, cards, options);
     };
     Chat.prototype.sendListTemplate = function (elements, buttons, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendListTemplate(this.userId, elements, buttons, options);
     };
     Chat.prototype.sendTemplate = function (payload, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendTemplate(this.userId, payload, options);
     };
     Chat.prototype.sendAttachment = function (type, url, quickReplies, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendAttachment(this.userId, type, url, quickReplies, options);
     };
     Chat.prototype.sendAction = function (action, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendAction(this.userId, action, options);
     };
     Chat.prototype.sendMessage = function (message, options) {
+        if (options === void 0) { options = {}; }
         return this.bot.sendMessage(this.userId, message, options);
     };
     Chat.prototype.sendRequest = function (body, endpoint, method) {

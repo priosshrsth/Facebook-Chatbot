@@ -8,7 +8,7 @@ export declare class Conversation extends Chat {
     private listeningCallbacks;
     private active;
     constructor(bot: any, userId: any);
-    ask(question: any, answer: any, callbacks: any, options: any): void | this;
+    ask(question: any, answer?: () => void, callbacks?: () => void, options?: {}): void | this;
     respond(payload: any, data: any): any;
     isActive(): boolean;
     isWaitingForAnswer(): any;

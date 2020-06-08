@@ -24,35 +24,35 @@ export class Chat extends EventEmitter {
     return this.bot.say(this.userId, message, options || {});
   }
 
-  sendTextMessage(text, quickReplies, options: ChatOptions) {
+  sendTextMessage(text, quickReplies, options: ChatOptions = {}) {
     return this.bot.sendTextMessage(this.userId, text, quickReplies, options);
   }
 
-  sendButtonTemplate(text, buttons, options) {
-    return this.bot.sendButtonTemplate(this.userId, text, buttons, options);
+  sendButtonTemplate(text, buttons, options: ChatOptions = {}) {
+    return this.bot.sendButtonTemplate(this.userId, text, buttons, options = {});
   }
 
-  sendGenericTemplate(cards, options) {
+  sendGenericTemplate(cards, options: ChatOptions = {}) {
     return this.bot.sendGenericTemplate(this.userId, cards, options);
   }
 
-  sendListTemplate(elements, buttons, options) {
+  sendListTemplate(elements, buttons, options: ChatOptions = {}) {
     return this.bot.sendListTemplate(this.userId, elements, buttons, options);
   }
 
-  sendTemplate(payload, options) {
+  sendTemplate(payload, options: ChatOptions = {}) {
     return this.bot.sendTemplate(this.userId, payload, options);
   }
 
-  sendAttachment(type, url, quickReplies, options) {
+  sendAttachment(type, url, quickReplies, options: ChatOptions ={}) {
     return this.bot.sendAttachment(this.userId, type, url, quickReplies, options);
   }
 
-  sendAction(action, options) {
+  sendAction(action, options: ChatOptions = {}) {
     return this.bot.sendAction(this.userId, action, options);
   }
 
-  sendMessage(message, options) {
+  sendMessage(message, options:ChatOptions = {}) {
     return this.bot.sendMessage(this.userId, message, options);
   }
 
