@@ -232,9 +232,9 @@ var FbHook = /** @class */ (function (_super) {
                         profile_picture_url: profile_picture_url
                     })
                 })
-                    .then(function (res) {
-                    var response = res.json();
-                    console.log(response);
+                    .then(function (res) { return res.json(); })
+                    .then(function (data) {
+                    console.log(data);
                 })
                     .catch(function (err) { return console.log("Error getting user profile: " + err); });
                 return [2 /*return*/];

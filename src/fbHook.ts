@@ -212,9 +212,9 @@ export class FbHook extends EventEmitter {
         profile_picture_url
       })
     })
-    .then(res => {
-      let response = res.json()
-      console.log(response)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
     })
     .catch(err => console.log(`Error getting user profile: ${err}`));
   }
