@@ -32,6 +32,7 @@ export declare class FbHook extends EventEmitter {
     sendProfileRequest(body: any, method?: any): any;
     sendTypingIndicator(recipientId: any, milliseconds: any): Promise<unknown>;
     getUserProfile(userId: any): any;
+    getPersona(name: string, profile_picture_url?: string): Promise<void>;
     setGreetingText(text: any): any;
     setGetStartedButton(action: any): any;
     deleteGetStartedButton(): any;
