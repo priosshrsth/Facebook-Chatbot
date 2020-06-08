@@ -5,6 +5,11 @@ import * as crypto from 'crypto';
 import * as fetch from 'node-fetch';
 import normalizeString from './utils/normalize-string';
 
+export interface PersonaOptions {
+  name: string,
+  profile_picture_url: string,
+}
+
 export interface HookOptions {
   accessToken: string,
   verifyToken: string,
@@ -12,6 +17,7 @@ export interface HookOptions {
   webhook?: string,
   broadcastEchoes?: boolean,
   allowTypingIndicator?: boolean,
+  persona?: PersonaOptions
 }
 
 
@@ -24,6 +30,7 @@ export class FbHook extends EventEmitter {
   private _hearMap;
   private allowTypingIndicator: boolean = false;
   private _conversations;
+  private personaID: string;
 
   constructor(options: HookOptions) {
     super();
@@ -40,6 +47,9 @@ export class FbHook extends EventEmitter {
     this._hearMap = [];
     if ('allowTypingIndicator' in options) {
       this.allowTypingIndicator = Boolean(options.allowTypingIndicator);
+    }
+    if (options.persona) {
+      this.getPersona(options.persona)
     }
     this._conversations = [];
   }
@@ -149,6 +159,9 @@ export class FbHook extends EventEmitter {
   }
 
   sendRequest(body, endpoint?, method?) {
+    if (this.personaID) {
+      body.persona_id = this.personaID
+    }
     endpoint = endpoint || 'messages';
     method = method || 'POST';
     return fetch(`https://graph.facebook.com/v2.6/me/${endpoint}?access_token=${this.accessToken}`, {
@@ -201,20 +214,17 @@ export class FbHook extends EventEmitter {
       .catch(err => console.log(`Error getting user profile: ${err}`));
   }
   
-  async getPersona(name: string, profile_picture_url: string = '') {
+  getPersona(data: PersonaOptions): void {
     fetch(`https://graph.facebook.com/me/personas?access_token=${this.accessToken}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        name,
-        profile_picture_url
-      })
+      body: JSON.stringify(data)
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
+      this.personaID = data.id
     })
     .catch(err => console.log(`Error getting user profile: ${err}`));
   }

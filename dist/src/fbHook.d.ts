@@ -1,5 +1,9 @@
 import { Conversation } from './Conversation';
 import { EventEmitter } from 'eventemitter3';
+export interface PersonaOptions {
+    name: string;
+    profile_picture_url: string;
+}
 export interface HookOptions {
     accessToken: string;
     verifyToken: string;
@@ -7,6 +11,7 @@ export interface HookOptions {
     webhook?: string;
     broadcastEchoes?: boolean;
     allowTypingIndicator?: boolean;
+    persona?: PersonaOptions;
 }
 export declare class FbHook extends EventEmitter {
     private readonly accessToken;
@@ -17,6 +22,7 @@ export declare class FbHook extends EventEmitter {
     private _hearMap;
     private allowTypingIndicator;
     private _conversations;
+    private personaID;
     constructor(options: HookOptions);
     close(): void;
     sendTextMessage(recipientId: any, text: string, quickReplies: any, options: any): any;
@@ -32,7 +38,7 @@ export declare class FbHook extends EventEmitter {
     sendProfileRequest(body: any, method?: any): any;
     sendTypingIndicator(recipientId: any, milliseconds: any): Promise<unknown>;
     getUserProfile(userId: any): any;
-    getPersona(name: string, profile_picture_url?: string): Promise<void>;
+    getPersona(data: PersonaOptions): void;
     setGreetingText(text: any): any;
     setGetStartedButton(action: any): any;
     deleteGetStartedButton(): any;
