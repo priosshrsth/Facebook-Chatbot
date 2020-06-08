@@ -221,24 +221,23 @@ var FbHook = /** @class */ (function (_super) {
     FbHook.prototype.getPersona = function (name, profile_picture_url) {
         if (profile_picture_url === void 0) { profile_picture_url = ''; }
         return __awaiter(this, void 0, void 0, function () {
-            var response;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, fetch("https://graph.facebook.com/me/personas?access_token=" + this.accessToken, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                name: name,
-                                profile_picture_url: profile_picture_url
-                            })
-                        })];
-                    case 1:
-                        response = _a.sent();
-                        console.log(response);
-                        return [2 /*return*/];
-                }
+                fetch("https://graph.facebook.com/me/personas?access_token=" + this.accessToken, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: name,
+                        profile_picture_url: profile_picture_url
+                    })
+                })
+                    .then(function (res) {
+                    var response = res.json();
+                    console.log(response);
+                })
+                    .catch(function (err) { return console.log("Error getting user profile: " + err); });
+                return [2 /*return*/];
             });
         });
     };

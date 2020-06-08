@@ -202,7 +202,7 @@ export class FbHook extends EventEmitter {
   }
   
   async getPersona(name: string, profile_picture_url: string = '') {
-    let response = await fetch(`https://graph.facebook.com/me/personas?access_token=${this.accessToken}`, {
+    fetch(`https://graph.facebook.com/me/personas?access_token=${this.accessToken}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -212,8 +212,11 @@ export class FbHook extends EventEmitter {
         profile_picture_url
       })
     })
-    
-    console.log(response)
+    .then(res => {
+      let response = res.json()
+      console.log(response)
+    })
+    .catch(err => console.log(`Error getting user profile: ${err}`));
   }
 
   setGreetingText(text) {
