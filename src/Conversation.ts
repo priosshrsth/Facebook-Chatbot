@@ -21,7 +21,7 @@ export class Conversation extends Chat {
     this.start();
   }
 
-  ask(question, answer, callbacks?, options = {}) {
+  ask(question, answer: Function, callbacks?, options = {}) {
     if (!question || !answer || typeof answer !== 'function') {
       return console.error(`You need to specify a question and answer to ask`);
     }

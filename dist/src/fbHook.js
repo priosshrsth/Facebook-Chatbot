@@ -308,7 +308,7 @@ var FbHook = /** @class */ (function (_super) {
         if (typeof message === 'string') {
             return this.sendTextMessage(recipientId, message, [], options);
         }
-        else if (message && message.text) {
+        else if (message && message.hasOwnProperty('text')) {
             if (message.quickReplies && message.quickReplies.length > 0) {
                 return this.sendTextMessage(recipientId, message.text, message.quickReplies, options);
             }
