@@ -14,6 +14,15 @@ export interface HookOptions {
     persona?: PersonaOptions;
     personaID?: string;
 }
+export interface FbUser {
+    first_name?: string;
+    last_name?: string;
+    profile_pic?: string;
+    locale?: string;
+    gender?: string;
+    id?: string;
+    email?: string;
+}
 export declare class FbHook extends EventEmitter {
     private readonly accessToken;
     private readonly verifyToken;

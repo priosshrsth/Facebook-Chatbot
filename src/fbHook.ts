@@ -21,6 +21,16 @@ export interface HookOptions {
   personaID?: string,
 }
 
+export interface FbUser {
+  first_name?: string,
+  last_name?: string,
+  profile_pic?: string,
+  locale?: string,
+  gender?: string,
+  id?: string,
+  email?: string
+}
+
 
 export class FbHook extends EventEmitter {
   private readonly accessToken;
