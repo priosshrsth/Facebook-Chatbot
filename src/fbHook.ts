@@ -302,11 +302,13 @@ export class FbHook extends EventEmitter {
   say(recipientId, message, options) {
     if (typeof message === 'string') {
       return this.sendTextMessage(recipientId, message, [], options);
-    } else if (message && message.hasOwnProperty('text')) {
-      if (message.quickReplies && message.quickReplies.length > 0) {
-        return this.sendTextMessage(recipientId, message.text, message.quickReplies, options);
-      } else if (message.buttons && message.buttons.length > 0) {
-        return this.sendButtonTemplate(recipientId, message.text, message.buttons, options);
+    } else if (message && message.quickReplies) {
+      if (message.quickReplies.length > 0) {
+        return this.sendTextMessage(recipientId, message.text || '', message.quickReplies, options);
+      }
+    } else if (message && message.buttons) {
+      if (message.buttons.length > 0) {
+        return this.sendButtonTemplate(recipientId, message.text || '', message.buttons, options);
       }
     } else if (message && message.attachment) {
       return this.sendAttachment(recipientId, message.attachment, message.url, message.quickReplies, options);
