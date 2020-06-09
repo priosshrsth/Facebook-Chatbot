@@ -28,8 +28,6 @@ var Conversation = /** @class */ (function (_super) {
         return _this;
     }
     Conversation.prototype.ask = function (question, answer, callbacks, options) {
-        if (answer === void 0) { answer = function () { }; }
-        if (callbacks === void 0) { callbacks = function () { }; }
         if (options === void 0) { options = {}; }
         if (!question || !answer || typeof answer !== 'function') {
             return console.error("You need to specify a question and answer to ask");
