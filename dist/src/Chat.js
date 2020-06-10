@@ -51,7 +51,7 @@ var Chat = /** @class */ (function (_super) {
     };
     Chat.prototype.sendAttachment = function (type, url, quickReplies, options) {
         if (options === void 0) { options = {}; }
-        return this.bot.sendAttachment(this.userId, type, url, quickReplies, options);
+        return this.bot.sendAttachment(this.userId, type, url, quickReplies || [], options);
     };
     Chat.prototype.sendAction = function (action, options) {
         if (options === void 0) { options = {}; }

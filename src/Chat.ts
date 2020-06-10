@@ -44,8 +44,8 @@ export class Chat extends EventEmitter {
     return this.bot.sendTemplate(this.userId, payload, options);
   }
 
-  sendAttachment(type, url, quickReplies, options: ChatOptions ={}) {
-    return this.bot.sendAttachment(this.userId, type, url, quickReplies, options);
+  sendAttachment(type, url, quickReplies?, options: ChatOptions ={}) {
+    return this.bot.sendAttachment(this.userId, type, url, quickReplies || [], options);
   }
 
   sendAction(action, options: ChatOptions = {}) {
