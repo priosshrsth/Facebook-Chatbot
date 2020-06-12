@@ -10,11 +10,12 @@ export default class FbHookProvider {
     // Register your own bindings
     this.$container.singleton('Adonis/Addons/FbHook', (app) => {
       const env = app.use('Adonis/Core/Env')
+      let allowTypingIndicator = env.get('FB_TYPING_INDICATOR') || ''
       return new FbHook(<HookOptions> {
         accessToken: env.get('FB_ACCESS_TOKEN'),
         appSecret: env.get('FB_APP_SECRET'),
         verifyToken: env.get("FB_VERIFY_TOKEN"),
-        allowTypingIndicator: true,
+        allowTypingIndicator: allowTypingIndicator.toLowerCase() === 'true',
         personaID: env.get("FB_PERSONA_ID"),
         persona: <PersonaOptions> {
           name: env.get("FB_PERSONA_NAME"),

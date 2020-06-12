@@ -9,11 +9,12 @@ var FbHookProvider = /** @class */ (function () {
         // Register your own bindings
         this.$container.singleton('Adonis/Addons/FbHook', function (app) {
             var env = app.use('Adonis/Core/Env');
+            var allowTypingIndicator = env.get('FB_TYPING_INDICATOR') || '';
             return new index_1.FbHook({
                 accessToken: env.get('FB_ACCESS_TOKEN'),
                 appSecret: env.get('FB_APP_SECRET'),
                 verifyToken: env.get("FB_VERIFY_TOKEN"),
-                allowTypingIndicator: true,
+                allowTypingIndicator: allowTypingIndicator.toLowerCase() === 'true',
                 personaID: env.get("FB_PERSONA_ID"),
                 persona: {
                     name: env.get("FB_PERSONA_NAME"),
