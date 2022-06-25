@@ -21,7 +21,7 @@
   "dependencies": {
     "config": "^2.0.2",
     "eventemitter3": "^4.0.4",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "@types/node": "^14.0.1",
